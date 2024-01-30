@@ -11,8 +11,8 @@ const page = () => {
         <div className='font-Cormorant'>
             <Navbar />
             {/* what we do */}
-            <section class="text-black body-font">
-                <div class="container px-5 py-5 mx-auto">
+            <section class="text-black body-font ">
+                <div class="container px-10 py-5 mx-auto">
                     <div className="mb-16 text-center text-gray-900 ">
                         <h1 class="sm:text-3xl text-2xl font-medium title-font  mb-4">What We Do
                         </h1>
@@ -86,7 +86,7 @@ const page = () => {
        
             {/* our work process */}
             <section class="text-black body-font">
-                <div class="container mx-auto flex px-5 py-5 md:flex-row flex-col items-center">
+                <div class="container mx-auto flex px-10  py-5 md:flex-row flex-col items-center">
                     <div class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                         <h1 class="title-font sm:text-xl text-2xl mb-6 font-semibold text-gray-900">Our Work Process
 
@@ -134,7 +134,7 @@ const page = () => {
             </section>
             {/* Pricing */}
             <section class="text-black body-font overflow-hidden">
-                <div class="container px-5 py-24 mx-auto">
+                <div class="container px-10 py-24 mx-auto">
                     <div class="flex flex-col text-center w-full mb-20">
                         <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Choose your Plan</h1>
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Monthly Basis</p>
@@ -142,7 +142,7 @@ const page = () => {
                     </div>
                     <div class="flex flex-wrap -m-4">
                         <div class="p-4 xl:w-1/3 md:w-1/3 w-full">
-                            <div class="h-full p-6 rounded-lg border-2 border-gray-300 bg-gray-50 flex flex-col relative overflow-hidden">
+                            <div class="h-full p-6 rounded-lg border-2 border-gray-300 bg-gray-50 flex flex-col relative overflow-hidden hover:bg-gray-200 ">
                                 <h2 class="text-xl text-gray-900 tracking-widest title-font pb-4 mb-4 font-semibold border-b border-gray-300">Basic</h2>
                                 <h2 class="text-2xl tracking-widest text-gray-900 pb-4 mb-4 title-font font-semibold border-b border-gray-300">Rs. 12000/- onwards</h2>
                                 <h1 class="text-sm text-gray-700  mb-4 leading-none">ex GST</h1>
@@ -230,7 +230,7 @@ const page = () => {
                             </div>
                         </div>
                         <div class="p-4 xl:w-1/3 md:w-1/3 w-full">
-                            <div class="h-full p-6 rounded-lg border-2 border-sky-600 bg-sky-500 flex flex-col relative overflow-hidden">
+                            <div class="h-full p-6 rounded-lg border-2 border-sky-600 bg-sky-500 flex flex-col relative overflow-hidden hover:bg-sky-600">
                             <h2 class="text-xl text-white tracking-widest title-font pb-4 mb-4 font-semibold border-b border-gray-300">Best Value</h2>
                                 <h2 class="text-2xl tracking-widest text-white pb-4 mb-4 title-font font-semibold border-b border-gray-300">Rs. 22000/- onwards</h2>
                                 <h1 class="text-sm text-gray-100  mb-4 leading-none">ex GST</h1>
@@ -318,7 +318,7 @@ const page = () => {
                         </div>
 
                         <div class="p-4 xl:w-1/3 md:w-1/3 w-full">
-                            <div class="h-full p-6 rounded-lg border-2 border-gray-300 bg-gray-50 flex flex-col relative overflow-hidden">
+                            <div class="h-full p-6 rounded-lg border-2 border-gray-300 bg-gray-50 flex flex-col relative overflow-hidden hover:bg-gray-200">
                                 <h2 class="text-xl text-gray-900 tracking-widest title-font pb-4 mb-4 font-semibold border-b border-gray-300">Enterprise</h2>
                                 <h2 class="text-2xl tracking-widest text-gray-900 pb-4 mb-4 title-font font-semibold border-b border-gray-300">Rs. 35000/- onwards</h2>
                                 <h1 class="text-sm text-gray-700  mb-4 leading-none">ex GST</h1>

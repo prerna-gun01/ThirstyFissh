@@ -132,7 +132,7 @@
   } */
   
 
-  body {
+  /* body {
     --black: #000000;
     --ash-black: #222;
     --white: #fafafa;
@@ -178,8 +178,8 @@
     height: 1px;
     background: var(--accent);
     opacity: 0.2;
-  }
-  
+  } */
+/*   
   footer svg {
     margin-right: 20px;
   }
@@ -224,4 +224,21 @@
     image-rendering: pixelated;
     image-rendering: optimize-contrast;
   }
+   */
+
+   /* body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #222222;
+  }
+  
+  circle,
+  rect,
+  line {
+    stroke-width: 10px;
+    stroke-linecap: round;
+    fill: transparent;
+  } */
   

@@ -4,13 +4,36 @@ import React from 'react'
 import Navbar from '../components/Navbar';
 import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
-
+import { motion, useMotionValue, useTransform, animate, Variants } from "framer-motion";
+import { useState } from "react";
+import { useEffect } from "react";
 const page = () => {
+    const count = useMotionValue(0);
+    const counter = useMotionValue(0);
+    const counteer = useMotionValue(0);
+    const rounded = useTransform(count, Math.round);
+    const round = useTransform(counter, Math.round);
+    const rounder = useTransform(counteer, Math.round);
+    useEffect(() => {
+        const animation = animate(count, 1460, { duration: 10 });
+        return animation.stop;
+        
+    }, []);
+    useEffect(() => {
+        const animation = animate(counter, 9, { duration: 2 });
+        return animation.stop;
+        
+    }, []);
+    useEffect(() => {
+        const animation = animate(counteer, 40, { duration: 4 });
+        return animation.stop;
+        
+    }, []);
     return (
         <div>
             <Navbar />
             <section class="text-gray-600 body-font">
-                <div class="container mx-auto flex px-5 py-5 justify-center flex-col">
+                <div class="container mx-auto flex px-10 py-5 justify-center flex-col">
                     <div class="flex relative">
                         <img alt="gallery" class="absolute inset-0 w-full h-full object-cover object-center" src="https://dummyimage.com/600x300" />
                         <div class="px-8 py-32 relative z-10 w-full h border-4  bg-white opacity-50">
@@ -21,11 +44,11 @@ const page = () => {
                     </div>
                 </div>
             </section>
-            <div className=" w-full h-max  container px-5 py-5 pt-0 mx-auto font-semibold text-xl">
+            <div className=" w-full h-max  container px-10 py-5 pt-0 mx-auto font-semibold text-xl">
                 <h4 className='text-gray-800 text-2xl'>Project Brief</h4>
             </div>
             <section class="text-gray-600 body-font">
-                <div class="container px-5 py-5 pt-0 mx-auto flex flex-wrap">
+                <div class="container px-10 py-5 pt-0 mx-auto flex flex-wrap">
 
                     <div class="md:w-2/3   mb-10 md:mb-0 pb-10 ">
                         <h1 class=" text-xl font-light mr-5 title-font mb-2 text-gray-900">KISAN TYRES is the well-known face of Tyre retailers in Western Maharashtra. Incorporated in 1987, Kisan Tyres offer a range of services for vehicles of all shapes and sizes at the Showroom cum Service Centre in the heart of the city.
@@ -73,7 +96,7 @@ const page = () => {
                 </div>
             </section>
             <section class="text-gray-600 body-font overflow-hidden">
-                <div class="container px-5 py-5 mx-auto">
+                <div class="container px-10 py-5 mx-auto">
                     {/* <div class="flex flex-col text-center w-full mb-20">
                         <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
                         <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
@@ -98,15 +121,15 @@ const page = () => {
                     </div>
                 </div>
             </section>
-            <div className=" w-full h-max text-center container px-5 py-5 pt-0 mx-auto font-semibold text-xl">
+            <div className=" w-full h-max text-center container px-10 py-5 pt-0 mx-auto font-semibold text-xl">
                 <h4 className='text-gray-800 text-2xl'>RESULTS ACHIEVED</h4>
                 <p className="text-lg">We are consulting since September 2019 and has taken the brand a step ahead!</p>
             </div>
             <section class="text-gray-600 body-font">
-                <div class="container px-5 py-24 mx-auto">
+                <div class="container px-10 py-24 mx-auto">
                     <div class="flex flex-wrap -m-4 text-center">
                         <div class="p-4 sm:w-1/4 w-1/2">
-                            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">1460</h2>
+                            <motion.h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">{rounded}</motion.h2>
                             <p class="leading-relaxed">New Followes</p>
                         </div>
                         <div class="p-4 sm:w-1/4 w-1/2">
@@ -114,18 +137,18 @@ const page = () => {
                             <p class="leading-relaxed">Franchise Sold</p>
                         </div>
                         <div class="p-4 sm:w-1/4 w-1/2">
-                            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">9</h2>
+                        <motion.h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">{round}</motion.h2>
                             <p class="leading-relaxed">Months of Consultancy</p>
                         </div>
                         <div class="p-4 sm:w-1/4 w-1/2">
-                            <h2 class="title-font font-medium sm:text-4xl text-3xl text-gray-900">400</h2>
+                        <motion.h2 className="title-font font-medium sm:text-4xl text-3xl text-gray-900">{rounder}</motion.h2>
                             <p class="leading-relaxed">Cups of Coffee</p>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="text-gray-600 body-font overflow-hidden">
-                <div class="container px-5 py-5 mx-auto">
+                <div class="container px-10 py-5 mx-auto">
 
                     <div class="flex flex-wrap -m-4">
                         <div class="p-4 xl:w-1/2 md:w-1/2 w-full">
@@ -144,13 +167,13 @@ const page = () => {
                 </div>
             </section>
             <section class="text-gray-600 body-font">
-                <div class="container mx-auto flex px-5 py-5 justify-center flex-col">
+                <div class="container mx-auto flex px-10 py-5 justify-center flex-col">
                     <img class="mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x300" />
                 </div>
             </section>
             <footer class="text-gray-600 body-font pt-4 ">
                 <div class="bg-gray-100">
-                    <div class="container mx-auto py-10 px-5 flex flex-wrap flex-col sm:flex-row">
+                    <div class="container mx-auto py-10 px-10 flex flex-wrap flex-col sm:flex-row">
                         <div>
                             <p className="text-gray-500 text-sm text-center sm:text-left">
                                 Thirsty Fishh | Beyond the obvious

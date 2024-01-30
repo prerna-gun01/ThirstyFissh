@@ -106,10 +106,9 @@ const page = () => {
 
     const [selectedTab, setSelectedTab] = useState(1);
     gsap.registerPlugin(TextPlugin, ScrollTrigger);
+   
     useEffect(() => {
 
-        
-       
         let tl = gsap.timeline({
             scrollTrigger: {
                 smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
@@ -120,6 +119,7 @@ const page = () => {
                 end: "bottom top",
                 // markers: true,
                 opacity: 0,
+                toggleActions: "restart none none none"
             },
         });
 
@@ -139,6 +139,7 @@ const page = () => {
                 end: "bottom top",
                 // markers: true,
                 opacity: 0,
+                toggleActions: "restart none none none"
             },
         });
         para.fromTo(".headed", { y: 100, opacity: 0 }, { y: 0, duration: 2, ease: "circ.out", opacity: 1 });
@@ -153,7 +154,7 @@ const page = () => {
                 trigger: ".dost",
                 start: "top 90%",
                 end: "bottom top",
-                markers: true,
+                toggleActions: "restart none none none",
                 opacity: 0,
             },
         });
@@ -165,7 +166,7 @@ const page = () => {
                 trigger: ".dost",
                 start: "top 90%",
                 end: "bottom top",
-                markers: true,
+                toggleActions: "restart none none none",
                 opacity: 0,
             },
         });
@@ -512,8 +513,8 @@ const page = () => {
                         <motion.img
                             key={index}
                             src={image}
-                            className=' w-32 h-20 mx-auto'
-                            alt={`Image ${index + 1}`}
+                            className='pl-10 w-32 h-20 mx-auto'
+                           
                             style={{
 
                                 marginRight: '10px',

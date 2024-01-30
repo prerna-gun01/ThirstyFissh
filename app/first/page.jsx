@@ -945,91 +945,401 @@
 //     );
 // }
 
+
+// import "../../css/module.home.css";
+// import { Canvas, useThree, useFrame } from "@react-three/fiber";
+// import { useRef, useLayoutEffect } from "react";
+// import { useTransform, useScroll, useTime } from "framer-motion";
+// import { degreesToRadians, progress, mix } from "popmotion";
+// import { Object3D } from 'three';
+// const color = "#111111";
+
+// const Icosahedron = () => (
+//   <mesh rotation-x={0.35}>
+//     <icosahedronGeometry args={[1, 0]} />
+//     <meshBasicMaterial wireframe color={color} />
+//   </mesh>
+// );
+
+// const Star = ({ p }) => {
+//   const ref = useRef(null);
+
+//   useLayoutEffect(() => {
+//     const distance = mix(2, 3.5, Math.random());
+//     const yAngle = mix(
+//       degreesToRadians(80),
+//       degreesToRadians(100),
+//       Math.random()
+//     );
+//     const xAngle = degreesToRadians(360) * p;
+//     ref.current.position.setFromSphericalCoords(distance, yAngle, xAngle);
+//   });
+
+//   return (
+//     <mesh ref={ref}>
+//       <boxGeometry args={[0.05, 0.05, 0.05]} />
+//       <meshBasicMaterial wireframe color={color} />
+//     </mesh>
+//   );
+// };
+
+// function Scene({ numStars = 100 }) {
+//   const gl = useThree((state) => state.gl);
+//   const { scrollYProgress } = useScroll();
+//   const yAngle = useTransform(
+//     scrollYProgress,
+//     [0, 1],
+//     [0.001, degreesToRadians(180)]
+//   );
+//   const distance = useTransform(scrollYProgress, [0, 1], [10, 3]);
+//   const time = useTime();
+
+//   useFrame(({ camera }) => {
+//     camera.position.setFromSphericalCoords(
+//       distance.get(),
+//       yAngle.get(),
+//       time.get() * 0.0005
+//     );
+//     camera.updateProjectionMatrix();
+//     camera.lookAt(0, 0, 0);
+//   });
+
+//   useLayoutEffect(() => gl.setPixelRatio(0.3));
+
+//   const stars = [];
+//   for (let i = 0; i < numStars; i++) {
+//     stars.push(<Star p={progress(0, numStars, i)} />);
+//   }
+
+//   return (
+//     <>
+//       <Icosahedron />
+//       {stars}
+//     </>
+//   );
+// }
+
+// export default function App() {
+//   return (
+//     <div className="h-52 w-52">
+//     <div className="container">
+//       <Canvas gl={{ antialias: false }}>
+//         <Scene />
+//       </Canvas>
+//     </div>
+//     </div>
+//   );
+// }
 "use client"
-import "../../css/module.home.css";
-import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { useRef, useLayoutEffect } from "react";
-import { useTransform, useScroll, useTime } from "framer-motion";
-import { degreesToRadians, progress, mix } from "popmotion";
-import { Object3D } from 'three';
-const color = "#111111";
+import React from 'react'
 
-const Icosahedron = () => (
-  <mesh rotation-x={0.35}>
-    <icosahedronGeometry args={[1, 0]} />
-    <meshBasicMaterial wireframe color={color} />
-  </mesh>
-);
+// import { motion, useAnimation } from "framer-motion";
+// import { useEffect } from "react";
 
-const Star = ({ p }) => {
-  const ref = useRef(null);
+// const LoadingSVG = () => {
+//   const controls = useAnimation();
 
-  useLayoutEffect(() => {
-    const distance = mix(2, 3.5, Math.random());
-    const yAngle = mix(
-      degreesToRadians(80),
-      degreesToRadians(100),
-      Math.random()
-    );
-    const xAngle = degreesToRadians(360) * p;
-    ref.current.position.setFromSphericalCoords(distance, yAngle, xAngle);
-  });
+//   useEffect(() => {
+//     const animatePath = async () => {
+//       await controls.start({
+//         opacity: [0, 1, 0], // Fading in and out
+//         transition: {
+//           repeat: Infinity, // Repeat the animation indefinitely
+//           duration: 2.5, // Adjust the duration as needed
+//         },
+//       });
+//     };
+
+//     animatePath();
+//   }, [controls]);
+
+//   return (
+//     <svg
+//       version="1.1"
+//       id="Layer_1"
+//       xmlns="http://www.w3.org/2000/svg"
+//       xmlnsXlink="http://www.w3.org/1999/xlink"
+//       x="0px"
+//       y="0px"
+//       viewBox="0 0 684 158"
+//       style={{ enableBackground: "new 0 0 684 158" }}
+//       xmlSpace="preserve"
+//     >
+//       <g id="Layer_1_00000172439709840492482220000005742948453259362209_">
+//         <g>
+//           <g>
+//             <motion.path
+//               initial={{ opacity: 0 }}
+//               animate={controls}
+//               d="M329.1,31.4c0,0.4,0,0.9,0,1.3c0,0.1,0,0.1-0.1,0.2c-0.1,1.3-0.6,2.4-1.2,3.5c-0.9,1.5-2.1,2.6-3.4,3.7
+//                 c-1.5,1.3-3.1,2.5-4.6,3.8c-1.6,1.4-3,2.9-3.9,4.9c0,0,0,0-0.1,0c0,0,0,0-0.1-0.1c-0.7-1.6-1.7-2.9-3-4c-1.5-1.3-3.1-2.6-4.6-3.8
+//                 c-1.3-1-2.5-2.1-3.6-3.4c-1.6-2-2.3-4.2-1.9-6.7c0.5-3,2.8-5.7,6.3-6.1c2.7-0.2,4.8,0.7,6.3,2.9c0.3,0.5,0.7,0.5,1,0
+//                 c1.6-2.3,4.3-3.4,7.1-2.8c2.8,0.6,4.6,2.4,5.4,5.1C328.9,30.4,329,30.9,329.1,31.4z"
+//               style={{ fill: "#6D6E71", stroke: "#6D6E71", strokeWidth: 2 }}
+//             />
+//             <motion.path
+//               initial={{ opacity: 0 }}
+//               animate={controls}
+//               d="M316,120.9c-0.1,0-0.2,0-0.3,0c-0.1-0.2-0.1-0.3-0.3-0.5c-1.9-2.3-3.7-4.6-5.6-7c-0.8-1-1.7-2-2.5-3
+//                 c0-0.4,0-0.8,0-1.1c0.1-0.1,0.1-0.3,0.1-0.5c0.3-3.4,0.6-6.7,0.9-10c0.5-6.2,1-12.3,1.6-18.5c0.5-6.4,1.1-12.8,1.6-19.2
+//                 c0-0.5,0.2-0.6,0.6-0.6c2.5,0,5,0,7.5,0c0.4,0,0.6,0.1,0.6,0.6c0.4,4.4,0.7,8.9,1.1,13.3c0.5,5.9,1,11.8,1.5,17.7
+//                 c0.5,5.9,1,11.8,1.5,17.6c0,0.3-0.1,0.8-0.3,1c-2.2,2.7-4.4,5.4-6.5,8.1C317,119.5,316.5,120.2,316,120.9z"
+//               style={{ fill: "#009CD9", stroke: "#009CD9", strokeWidth: 2 }}
+//             />
+//             <motion.path
+//               initial={{ opacity: 0 }}
+//               animate={controls}
+//               d="M310,51c4,0,7.9,0,11.8,0c-0.6,2.4-1.2,4.7-1.8,7c0,0.1-0.3,0.3-0.5,0.3c-2.5,0-4.9,0-7.4,0
+//                 c-0.1,0-0.4-0.2-0.4-0.3C311.1,55.7,310.6,53.4,310,51z"
+//               style={{ fill: "#009CD9", stroke: "#009CD9", strokeWidth: 2 }}
+//             />
+//           </g>
+//         </g>
+//       </g>
+//     </svg>
+//   );
+// };
+
+// export default LoadingSVG;
+// components/StyledSVG.js
+// components/StyledSVG.js
+// components/StyledSVG.js
+// components/StyledSVG.js
+// import { motion, useAnimation } from "framer-motion";
+// import { useEffect } from "react";
+
+// const StyledSVG = () => {
+//   const controlsPath1 = useAnimation();
+//   const controlsPath2 = useAnimation();
+//   const controlsPath3 = useAnimation();
+
+//   useEffect(() => {
+//     const animatePaths = async () => {
+//       while (true) {
+//         await controlsPath1.start({
+//           opacity: [0, 1, 0],
+//           transition: {
+//             repeat: 0,
+//             duration: 0.5,
+//           },
+//         });
+
+
+
+//         await controlsPath3.start({
+//           opacity: [0, 1, 0],
+//           transition: {
+//             repeat: 0,
+//             duration: 0.5,
+//           },
+//         });
+
+//         await controlsPath2.start({
+//           opacity: [0, 1, 0],
+//           transition: {
+//             repeat: 0,
+//             duration: 0.5,
+//           },
+//         });
+//       }
+//     };
+
+//     animatePaths();
+//   }, [controlsPath1, controlsPath2, controlsPath3]); 
+
+//   return (
+//     <motion.svg
+//       version="1.1"
+//       id="Layer_1"
+//       xmlns="http://www.w3.org/2000/svg"
+//       xmlnsXlink="http://www.w3.org/1999/xlink"
+//       x="0px"
+//       y="0px"
+//       viewBox="0 0 684 158"
+//       style={{
+//         enableBackground: "new 0 0 684 158",
+//         animation: "fade",
+//         grouping: "none",
+//         order: "normal",
+//         timeFlow: "alternate",
+//       }}
+//       xmlSpace="preserve"
+//     >
+//       <motion.g id="Layer_1_00000172439709840492482220000005742948453259362209_">
+//         <motion.g>
+//           <motion.g>
+//             <motion.path
+//               initial={{ opacity: 0 }}
+//               animate={controlsPath1}
+//               d="M329.1,31.4c0,0.4,0,0.9,0,1.3c0,0.1,0,0.1-0.1,0.2c-0.1,1.3-0.6,2.4-1.2,3.5c-0.9,1.5-2.1,2.6-3.4,3.7
+//                 c-1.5,1.3-3.1,2.5-4.6,3.8c-1.6,1.4-3,2.9-3.9,4.9c0,0,0,0-0.1,0c0,0,0,0-0.1-0.1c-0.7-1.6-1.7-2.9-3-4c-1.5-1.3-3.1-2.6-4.6-3.8
+//                 c-1.3-1-2.5-2.1-3.6-3.4c-1.6-2-2.3-4.2-1.9-6.7c0.5-3,2.8-5.7,6.3-6.1c2.7-0.2,4.8,0.7,6.3,2.9c0.3,0.5,0.7,0.5,1,0
+//                 c1.6-2.3,4.3-3.4,7.1-2.8c2.8,0.6,4.6,2.4,5.4,5.1C328.9,30.4,329,30.9,329.1,31.4z"
+//               style={{ fill: "#6D6E71", stroke: "#6D6E71", strokeWidth: 2 }}
+//             />
+//             <motion.path
+//               initial={{ opacity: 0 }}
+//               animate={controlsPath2}
+//               d="M316,120.9c-0.1,0-0.2,0-0.3,0c-0.1-0.2-0.1-0.3-0.3-0.5c-1.9-2.3-3.7-4.6-5.6-7c-0.8-1-1.7-2-2.5-3
+//                 c0-0.4,0-0.8,0-1.1c0.1-0.1,0.1-0.3,0.1-0.5c0.3-3.4,0.6-6.7,0.9-10c0.5-6.2,1-12.3,1.6-18.5c0.5-6.4,1.1-12.8,1.6-19.2
+//                 c0-0.5,0.2-0.6,0.6-0.6c2.5,0,5,0,7.5,0c0.4,0,0.6,0.1,0.6,0.6c0.4,4.4,0.7,8.9,1.1,13.3c0.5,5.9,1,11.8,1.5,17.7
+//                 c0.5,5.9,1,11.8,1.5,17.6c0,0.3-0.1,0.8-0.3,1c-2.2,2.7-4.4,5.4-6.5,8.1C317,119.5,316.5,120.2,316,120.9z"
+//               style={{ fill: "#009CD9", stroke: "#009CD9", strokeWidth: 2 }}
+//             />
+//             <motion.path
+//               initial={{ opacity: 0 }}
+//               animate={controlsPath3}
+//               d="M310,51c4,0,7.9,0,11.8,0c-0.6,2.4-1.2,4.7-1.8,7c0,0.1-0.3,0.3-0.5,0.3c-2.5,0-4.9,0-7.4,0
+//                 c-0.1,0-0.4-0.2-0.4-0.3C311.1,55.7,310.6,53.4,310,51z"
+//               style={{ fill: "#009CD9", stroke: "#009CD9", strokeWidth: 2 }}
+//             />
+//           </motion.g>
+//         </motion.g>
+//       </motion.g>
+//     </motion.svg>
+//   );
+// };
+
+// export default StyledSVG;
+// import { useEffect } from 'react';
+// import { motion, useAnimation } from 'framer-motion';
+
+// const ScrollZoomContainer = () => {
+//   const controls = useAnimation();
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       const scrollY = window.scrollY;
+//       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+//       // Adjust the values based on your specific use case
+//       const zoomFactor = 1 + scrollY / 500;
+//       const opacity = 1 - scrollY / 500;
+
+//       // Apply zoom-in effect and opacity based on scroll position
+//       controls.start({
+//         scale: zoomFactor,
+//         opacity: opacity,
+//       });
+
+//       // Check if at the end of the scroll and fade out
+//       if (scrollY >= maxScroll - 100) {
+//         controls.start({
+//           opacity: 0,
+//         });
+//       }
+//     };
+
+//     // Attach scroll event listener
+//     window.addEventListener('scroll', handleScroll);
+
+//     // Cleanup event listener on component unmount
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, [controls]);
+
+//   return (
+//     <div>
+//       <motion.div
+//         animate={controls}
+//         transition={{ type: 'spring', stiffness: 100 }}
+//         style={{
+//           width: '100%',
+//           height: '70vh', // Adjust as needed
+//           display: 'flex',
+//           justifyContent: 'center',
+//           alignItems: 'center',
+//           background: '#f0f0f0', // Background color, adjust as needed
+//         }}
+//       >
+//         {/* Your content goes here, this element will zoom in as you scroll */}
+//         <h1>Your Zooming Element</h1>
+//       </motion.div>
+
+//       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure numquam, error repudiandae dolores doloremque laborum quod ex blanditiis cupiditate ullam adipisci pariatur veritatis omnis, fugit, laboriosam optio consequuntur? Corporis laboriosam quo enim voluptas? Voluptatibus, culpa perferendis quae perspiciatis quaerat molestiae quis repellendus aspernatur quo veritatis quidem, cumque enim doloribus commodi tenetur qui quia minima omnis quibusdam a quos nesciunt voluptates dolor facere. Deleniti dignissimos voluptas alias, qui eum rerum quos id perferendis debitis esse reprehenderit dolores praesentium, at natus nobis cum impedit! Architecto ipsa quia neque voluptas sed beatae exercitationem, eius cumque consequatur iure! Explicabo exercitationem similique doloremque tempore harum mollitia, amet excepturi, ea ipsa expedita, laborum nulla! Accusantium optio ratione iusto earum, reprehenderit qui sequi voluptatum vitae quibusdam ut a rem molestiae? Fuga, doloremque officiis ad nulla vel blanditiis, iusto atque quis expedita minus reiciendis. Ipsa, ducimus consectetur illum dolores eveniet pariatur aspernatur ex consequatur quaerat iusto nostrum vel aut temporibus beatae nihil voluptatum, molestiae aliquam qui suscipit! Eos, voluptatem distinctio aliquam ratione commodi quis aperiam fuga, quia pariatur tenetur voluptatum dicta officiis modi in est laboriosam nemo rerum quod esse molestiae dolorum aliquid. Sunt cum officia nisi odio blanditiis, asperiores culpa distinctio quae laudantium fugiat commodi corrupti harum soluta quaerat voluptas. Voluptatem reprehenderit consectetur vel rem molestias illum laborum beatae obcaecati voluptas sequi saepe eius, eveniet repudiandae autem voluptatum mollitia, doloremque quasi est, aperiam voluptate accusantium ipsam provident necessitatibus! Dolores aperiam accusantium earum tempora illum harum magni obcaecati reprehenderit est non enim officiis aut, numquam officia cum, vel alias, at repellendus ducimus. A fugiat perspiciatis aperiam aliquid, magni temporibus et! Tempora sit ullam cumque quas itaque officia sequi at dolorem eum accusamus! Consectetur tenetur eius rem magni aspernatur officia reiciendis sunt quos voluptatum est, esse neque recusandae dolores repudiandae doloremque sequi, quasi nihil tempore vel et enim quod debitis! Nisi eligendi explicabo nesciunt impedit repellendus sapiente illo ratione, maxime, quas corporis ab quae asperiores? Id ex, asperiores rem, quidem voluptas quos dolorem tempora atque molestias praesentium ipsa! Laborum optio quam atque. Nobis corrupti totam, praesentium tenetur fugiat iste eveniet sit excepturi mollitia explicabo dicta odit repellendus voluptatum voluptate, ad dolor quo? Suscipit necessitatibus facilis quo officiis iste nostrum, impedit ipsam ducimus ea vitae dolor, doloremque velit exercitationem a, odio ab veniam laboriosam quis magni aperiam labore! Saepe dolores nostrum eaque error laboriosam nam quasi inventore natus laborum eligendi quos reiciendis neque aspernatur, distinctio accusamus animi ducimus ratione dolor nesciunt dignissimos nihil officia recusandae veniam aut! Eius vero, quo facilis aliquam dolores fugiat sit magnam eligendi, id quisquam officia. Praesentium provident nemo dolor, voluptas sit nihil odit quibusdam ipsa molestias asperiores ut, iusto animi placeat? Ipsa dignissimos rem amet reiciendis sit deleniti voluptatem cupiditate vero cum, perferendis esse quam, illum excepturi maxime iure voluptates quibusdam nulla exercitationem, quasi totam aperiam! Recusandae voluptas perferendis praesentium temporibus aliquam nobis, quod similique amet. Repudiandae nam debitis blanditiis asperiores molestias a repellat ut cupiditate dignissimos soluta earum repellendus nemo aliquid, consectetur vero fugiat veritatis at nesciunt aliquam. Vero, aperiam mollitia illum repellendus corporis, eos ab sint natus recusandae maiores illo facere praesentium dolores. Nemo id veritatis possimus. Sunt, ea. Inventore autem aut quisquam aperiam officiis quo deserunt culpa alias error! Iure fugit fugiat voluptatum vitae! Sequi, a dolores hic maxime accusantium aliquam, sunt nam mollitia suscipit obcaecati enim quia. Consequatur, nihil. Dicta magnam doloremque laboriosam laborum inventore rerum sunt, rem natus minus nisi, necessitatibus labore? Ipsa rem doloremque saepe vitae molestias, veniam eveniet deserunt culpa, eius aut repellat optio quasi quo recusandae modi sapiente explicabo voluptatem? Nemo vitae molestiae nihil, dolorem dignissimos iure unde repudiandae quasi, assumenda sequi eligendi omnis ducimus beatae? Fuga aspernatur autem vero libero consequuntur sint sequi natus dolores a possimus eum, tempore quaerat porro numquam architecto et modi quam? Eos nobis voluptas debitis animi porro accusantium soluta. Perferendis alias dolor aspernatur debitis totam cum inventore modi ea animi, magnam sequi consequuntur ipsam quisquam illum amet veritatis ducimus porro non! Veritatis dolores, nobis inventore aperiam quo culpa? Quisquam at perspiciatis esse nam? Illum eveniet est corrupti beatae animi ipsum aut, praesentium ipsa deserunt explicabo commodi ab quod dolores! Molestiae officiis atque mollitia dolor provident deleniti sapiente reiciendis temporibus quis. Ducimus recusandae nostrum culpa nemo deserunt mollitia aliquam aut libero voluptates, debitis fugit repellat accusantium inventore assumenda est cum, hic sapiente quidem veritatis animi nesciunt reprehenderit, laboriosam eveniet! Veniam explicabo aliquid similique excepturi. Quam sint assumenda aliquam reprehenderit odit voluptatum necessitatibus modi incidunt totam, tenetur quasi provident molestiae? Expedita, quisquam minima! Temporibus, nihil libero. Dolorem, minima voluptas vitae, minus deserunt est aliquid praesentium dicta necessitatibus numquam magnam nisi laborum debitis ad. Et voluptates ipsam laborum veritatis explicabo maiores quos, ipsum accusamus id doloremque blanditiis possimus, voluptate odit cupiditate recusandae qui totam at architecto. Veniam neque cupiditate obcaecati doloribus facere amet odit, iste voluptatum corporis corrupti, quos, quod cum delectus. Minus quo dolorem commodi quam! Ratione sunt quisquam velit. Repudiandae animi at odio earum deserunt? Quia perspiciatis, eum nostrum amet distinctio tempore dicta illo ab voluptatem quae minus culpa quidem, molestias sapiente esse adipisci sit! Voluptate ea perferendis veritatis quod, odit a molestias blanditiis doloremque dolorum consequatur commodi delectus. Corrupti vero repudiandae veniam ex laudantium repellat culpa quae aliquam qui ducimus distinctio dolore nemo, sit temporibus! Alias, amet explicabo assumenda corrupti eum harum! Fugiat, qui, tempora quidem dolores atque iure laudantium officia fuga rem perspiciatis quia cumque ducimus assumenda quo numquam, est fugit cupiditate aut doloremque! Cupiditate, culpa dolorem! Ipsam, cum provident quasi magni aperiam excepturi sint cumque ex numquam minus nihil explicabo hic est omnis iste maxime? Molestiae quis nihil maxime distinctio repellendus in temporibus iure perspiciatis ea architecto commodi voluptas optio fuga consectetur voluptate, reprehenderit nam accusamus officia nulla magni officiis non ipsam culpa nemo. Doloribus quidem nostrum consequuntur quasi impedit expedita voluptates itaque, dignissimos, soluta quos fugiat reprehenderit accusamus obcaecati, debitis aperiam officia nemo tempora placeat facilis? Nobis eius aspernatur officiis tempore mollitia voluptatibus amet harum cumque ipsam? Ea inventore provident animi quam voluptatum dolor laborum eveniet exercitationem ullam minus corrupti corporis, accusantium, dolores nobis, cupiditate aut modi voluptas!</p>
+//     </div>
+//   );
+// };
+
+// export default ScrollZoomContainer;
+import { useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+
+const ScrollZoomContainer = () => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const zoomFactor = 1 - scrollY / 500;
+      const opacity = 1 + scrollY / 500;
+      controls.start({
+        scale: zoomFactor,
+        opacity: opacity,
+        lag: 0.5, speed: 1,
+      });
+      if (scrollY >= maxScroll - 100) {
+        controls.start({
+          opacity: 0,
+        });
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [controls]);
 
   return (
-    <mesh ref={ref}>
-      <boxGeometry args={[0.05, 0.05, 0.05]} />
-      <meshBasicMaterial wireframe color={color} />
-    </mesh>
+    <div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore quasi fugit quas eaque consectetur porro delectus libero cupiditate, sint eligendi, facere aliquid unde est sed aperiam autem atque, deleniti officiis rerum. Pariatur totam molestiae ratione tenetur, culpa officia omnis odio provident fuga excepturi dicta explicabo ducimus facere enim itaque aliquam officiis voluptate labore minima fugit voluptatum maiores. Iure minus minima amet? Dolore iure aliquam impedit aspernatur consequuntur fugiat quod nulla rerum. Reprehenderit sapiente cumque possimus odio fugiat amet ullam. Temporibus, eius possimus est consequatur dolore molestias repellat, dicta atque perspiciatis aspernatur id repudiandae corrupti natus laboriosam iste animi eos! Commodi ab debitis quam. Corrupti facilis ut quaerat incidunt culpa? Ipsam, quos reiciendis blanditiis ipsa sunt accusamus. Tenetur hic voluptate ad modi placeat laudantium explicabo, earum obcaecati ipsam ipsa sunt. Perferendis, recusandae voluptatum, unde enim non ipsa consequatur ipsam accusantium praesentium inventore illo soluta laudantium nulla eaque optio, dolore at quidem cupiditate! Illum necessitatibus debitis provident officia? Placeat maiores voluptates ab beatae fuga. Iste earum quisquam, officia ullam voluptatum est dolorum illum nisi inventore vel recusandae nulla architecto accusantium excepturi, amet iure fuga totam corrupti porro dignissimos a animi ipsa deserunt eius! Laudantium doloribus iure quia accusantium, repellat, provident reprehenderit sapiente alias ratione ab nulla fugit consectetur magni minima. Nesciunt a maiores eaque vero porro officiis adipisci ex reprehenderit expedita commodi natus, tenetur repudiandae consequuntur praesentium aut nobis. Ex, dolorem iusto deserunt id suscipit eaque alias vero nam maxime maiores, quis rerum a? Sunt obcaecati dolores blanditiis cumque nulla sequi dolorum possimus, officiis natus minima a, repudiandae quas eos. Dolorum in repellat sit a, eligendi sed assumenda totam quis placeat id tempora saepe et voluptates tempore quod! Eaque ratione, enim adipisci velit quae dolores dolore est modi veritatis amet hic. Tempora soluta veritatis at error deserunt, totam reprehenderit unde sapiente necessitatibus?</p>
+
+      <div className="grid grid-cols-2 grid-rows-2 gap-4">
+        <div >
+          <motion.img
+            className='pt-5'
+            src='/logo.svg'
+            animate={controls}
+            transition={{ type: 'spring', stiffness: 100 }}
+            style={{
+              width: '100%',
+              // Adjust as needed
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              // Background color, adjust as needed
+            }}
+          >
+            {/* Your content goes here, this element will zoom in as you scroll */}
+
+          </motion.img>
+        </div>
+        <div className="col-start-2 row-start-2" >
+          <motion.img
+            className='pt-5'
+            src='/logo.svg'
+            animate={controls}
+            transition={{ type: 'spring', stiffness: 100 }}
+            style={{
+              width: '100%',
+              // Adjust as needed
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              // Background color, adjust as needed
+            }}
+          >
+            {/* Your content goes here, this element will zoom in as you scroll */}
+
+          </motion.img>
+        </div>
+      </div>
+
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis accusamus, fugiat culpa rem expedita reiciendis ut vero neque esse optio, officia dolorem. Hic non, saepe eaque quos sequi fuga veniam perferendis debitis deserunt tempora quia, perspiciatis iure quas excepturi nesciunt error? Dicta non tempora quae et molestiae dignissimos, repellat eligendi est explicabo minus eaque perspiciatis exercitationem nisi laborum eveniet necessitatibus. Illum a assumenda consectetur, quam quibusdam dolore quisquam. Aliquid laborum repellendus ut incidunt a quas repellat dignissimos tempora animi laudantium rem ratione aut, velit nihil hic voluptate. Quos similique aperiam quaerat distinctio neque iusto voluptate quidem eveniet sit aspernatur soluta, unde omnis culpa doloremque ad cupiditate quasi enim accusamus ex? Ab error dolor laboriosam deleniti sunt dolorum ipsa libero debitis quisquam at est adipisci id voluptas quia, quae eius sit quo consequuntur aut, eaque quaerat. A impedit minus voluptatum maiores accusamus voluptatibus enim. Quod laborum doloremque vitae magni distinctio, in commodi ut consequatur error similique sint fuga tempore qui dignissimos tempora aliquid ab facilis veritatis animi, repellendus iste nemo dolores minus saepe. Eius ut placeat quasi quo, excepturi officiis vero. Amet, quod ex. Animi voluptates tempore voluptas delectus? Rerum, sit? Minima ut aperiam odio quae deserunt dignissimos, officia quibusdam quisquam odit consequatur perferendis voluptate eum id quidem ex quo ipsum animi. Incidunt iusto temporibus iste ab excepturi sed ex maiores exercitationem adipisci voluptas cupiditate aspernatur velit, asperiores reiciendis hic error rerum. Accusamus praesentium dolorem, error repudiandae aperiam dolorum totam veniam quos saepe mollitia dolore ut at impedit eligendi rem ullam aspernatur. Error sit quibusdam veniam. Provident porro accusantium excepturi dolorum asperiores. Eius deserunt reiciendis at totam explicabo sapiente velit accusantium illum, vero quo quisquam asperiores </p>
+      
+      <p>dolore minima nobis impedit ut, saepe error animi exercitationem non pariatur beatae! Voluptatum, delectus amet. Non, expedita nulla quod laborum quas ea impedit repellat sint libero tempora ipsum magnam beatae magni recusandae quos, ratione ipsa, iste possimus voluptate blanditiis eaque voluptas harum cum! Ad culpa quos nesciunt doloribus molestiae ex libero soluta, sapiente magni corporis nam dolorem odio pariatur ratione voluptatem dicta saepe tempora aut quo! Accusantium dignissimos fugiat non vero quas minima sapiente architecto voluptatibus officiis eos sed cupiditate nobis iure id reprehenderit laudantium, aliquid quaerat quos dolor aliquam distinctio? Vel, in officia dolorum dolorem dolore cupiditate, fuga necessitatibus, quod minus est enim nostrum architecto cum amet recusandae aperiam obcaecati! Necessitatibus doloremque inventore maxime nulla aut autem beatae minus, expedita temporibus voluptatem aspernatur sequi, vero doloribus ex impedit distinctio suscipit ratione dolores tenetur, molestiae nihil deleniti quaerat omnis iusto. Nihil provident quae totam temporibus maiores quos incidunt, similique, excepturi deleniti facere rerum. Repudiandae totam sapiente rem eaque inventore dignissimos omnis, libero error, commodi quo rerum, explicabo quam. Repellat voluptatum, reprehenderit animi harum culpa optio debitis quas ratione nesciunt? Neque temporibus obcaecati odit debitis exercitationem quibusdam animi? Unde, consequuntur vel corrupti ab harum error reiciendis eaque? Corrupti sequi, dolor necessitatibus aliquam quam qui, hic fugiat, dolores possimus quidem eum nemo? Enim eaque, at aut quasi reprehenderit ullam voluptatum tempore optio repudiandae iusto rem nemo recusandae magnam obcaecati dolores eligendi libero expedita praesentium quisquam eum amet minus atque unde quia! Maiores, commodi iste autem qui placeat eos perferendis accusantium laudantium maxime nisi unde odio quia doloremque ipsa, eius nulla eum id, possimus minima quas quam distinctio. Alias perspiciatis recusandae esse numquam mollitia consequatur quos quae placeat, corrupti sequi facere ad iste sit dicta aliquam accusamus ipsa illo qui similique quas pariatur aperiam voluptatum atque! Distinctio laboriosam dolore esse iusto quo sunt nostrum earum, provident vel optio. Aliquid voluptas omnis culpa, distinctio fugiat eveniet facilis. Molestias repudiandae laborum praesentium odio nam illum deleniti accusantium iste quos, dolores tempora sapiente est fugit assumenda sit aliquam quasi. Odio dolorum architecto esse soluta dolores molestiae neque deleniti sit rerum magnam? Perspiciatis, rem, inventore eum dolor culpa minus, corporis nobis quia repudiandae cumque optio magni repellat! Cumque facere expedita esse minima commodi voluptatum laboriosam assumenda impedit omnis quisquam et est, dolorem delectus, quos autem blanditiis sed officiis nobis enim ratione. Consequatur laborum voluptas harum magnam unde neque praesentium nihil doloribus labore aspernatur assumenda possimus, nam quas inventore non nisi laboriosam quisquam quidem. Ab consequatur, odit aliquam et officiis excepturi officia cumque assumenda incidunt ipsam numquam, voluptatum ut dignissimos obcaecati at quasi mollitia iusto soluta sit adipisci perspiciatis. Vel, repellat explicabo! Animi asperiores excepturi eos minus suscipit repudiandae illum sed eligendi, architecto esse nisi aliquam, dignissimos doloribus ea aut, aliquid laborum rem consequatur quisquam tempore iusto. Eligendi, velit illo debitis a quos dignissimos tempore est fugiat cumque neque beatae fuga, ex incidunt similique consequuntur tempora, id assumenda corrupti voluptatum soluta at. Itaque obcaecati pariatur velit voluptates perspiciatis veniam accusamus, nulla quidem voluptatibus et. Dolorem dolorum magni labore laboriosam ipsam iusto aliquam quae debitis odit ut quaerat quas nulla, laudantium, asperiores expedita! Cum quis amet dolorem quidem explicabo vero accusamus at, repellendus tenetur tempore quisquam cupiditate pariatur! Vel aliquam adipisci voluptatibus nisi cupiditate quibusdam, dolorum labore, aliquid quis quam fuga nihil! Doloribus suscipit distinctio maiores sunt tenetur repellat laboriosam autem eos molestias, ad excepturi, ullam vel accusantium quos temporibus labore adipisci rem impedit nihil. Facilis nulla odio, sequi cupiditate, qui repellat ullam quas quia ad accusamus, est doloremque corrupti earum consequuntur officiis optio? Assumenda ex labore quibusdam, quo vitae non aut, nisi incidunt dolorum vero, placeat fugiat quasi sunt perspiciatis magni totam quod quidem voluptates! Distinctio illum quaerat dignissimos cumque reiciendis et ex at dolor repudiandae. Sit, id! Ab at, eligendi ratione adipisci ad recusandae facilis dolores dolor nemo, consequatur voluptate quaerat animi quisquam laudantium deserunt vitae fuga accusamus sunt laboriosam incidunt! Molestiae praesentium libero illum aspernatur eligendi eaque aut at voluptate magnam sint animi mollitia odit molestias ipsa excepturi pariatur qui nihil doloribus, debitis delectus. Adipisci sunt earum, aut illum praesentium molestiae impedit nisi quis consequatur est rerum explicabo. Cum temporibus eaque consequatur? Quasi nam natus laboriosam officia sit ullam tempora consectetur assumenda nostrum, explicabo architecto! Minus perferendis ab nulla dolore, non fugiat corporis magni aperiam, voluptatum culpa ipsa quisquam laboriosam quae praesentium. Voluptates magnam quas minus nesciunt, corrupti illo deleniti mollitia.</p>
+    </div>
   );
 };
 
-function Scene({ numStars = 100 }) {
-  const gl = useThree((state) => state.gl);
-  const { scrollYProgress } = useScroll();
-  const yAngle = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0.001, degreesToRadians(180)]
-  );
-  const distance = useTransform(scrollYProgress, [0, 1], [10, 3]);
-  const time = useTime();
-
-  useFrame(({ camera }) => {
-    camera.position.setFromSphericalCoords(
-      distance.get(),
-      yAngle.get(),
-      time.get() * 0.0005
-    );
-    camera.updateProjectionMatrix();
-    camera.lookAt(0, 0, 0);
-  });
-
-  useLayoutEffect(() => gl.setPixelRatio(0.3));
-
-  const stars = [];
-  for (let i = 0; i < numStars; i++) {
-    stars.push(<Star p={progress(0, numStars, i)} />);
-  }
-
-  return (
-    <>
-      <Icosahedron />
-      {stars}
-    </>
-  );
-}
-
-export default function App() {
-  return (
-    <div className="h-52 w-52">
-    <div className="container">
-      <Canvas gl={{ antialias: false }}>
-        <Scene />
-      </Canvas>
-    </div>
-    </div>
-  );
-}
-
+export default ScrollZoomContainer;
 
 

@@ -28,7 +28,7 @@ const page = () => {
     });
 
     let tl = gsap.timeline({ repeat: 2, repeatDelay: 1 });
-    tl.fromTo("#purple", { x: 0, opacity: 0 }, { x: 200, duration: 2, ease: "elastic.out(1,0.3)", opacity: 0.8 });
+    tl.fromTo("#purple", { x: 0, opacity: 0 }, { x: 200, duration: 2, ease: "elastic.out(1,0.3)", opacity: 0.8, height:200, width:200, repeat:Infinity });
     tl.to("#blue", { y: 50, duration: 1 });
     tl.to(".box", { opacity: 0.3, duration: 1 });
 
@@ -88,7 +88,7 @@ const page = () => {
         <div className={`box h-20 w-20 bg-green-500`}></div>
         <div className={`class rounded-full h-20 w-20 bg-green-500`}></div>
         <div className={`class rounded-full h-20 w-20 bg-red-200`}></div>
-        <div className={`h-20 w-20 bg-purple-500`} id='purple'></div>
+        <div className={`h-20 w-20 bg-gray-500`} id='purple'></div>
         <div className={`h-20 w-20 bg-blue-500`} id='blue'></div>
       </div>
       <div className="india"></div>
