@@ -6,7 +6,7 @@ import Styles from '../../css/home.module.css'
 const Navbar = () => {
   return (
     
-      <div className="text-gray-200 body-font bg-gray-800">
+      <div className="text-gray-200 body-font bg-gray-600">
                 <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                     <a className="flex title-font font-medium items-center text-sky-500 mb-4 md:mb-0">
 

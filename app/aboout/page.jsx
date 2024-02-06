@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { FaAngleRight } from "react-icons/fa";
 
@@ -13,10 +13,14 @@ import {
 import {
     Card,
     CardContent,
-   
+
 } from "@/components/ui/card"
 import Autoplay from "embla-carousel-autoplay"
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer'
+import { motion } from 'framer-motion';
+import { gsap } from 'gsap/all';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const page = () => {
     const [activeTab, setActiveTab] = useState('tab1');
@@ -24,35 +28,75 @@ const page = () => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+    const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    // Initialize GSAP timeline with ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
+    const tl = gsap.timeline();
+
+    tl.to('.zoom-container', {
+      scale: 1, // Initial scale when not triggered
+      opacity: 1,
+      ease: 'power4.out',
+    });
+
+    // Trigger the timeline on scroll
+    ScrollTrigger.create({
+      trigger: '.box',
+      start: 'top ',
+      end: 'bottom top',
+      markers: true,
+      smooth: 5, // how long (in seconds) it takes to "catch up" to the native scroll position
+      effects: true, // looks for data-speed and data-lag attributes on elements
+      smoothTouch: 0.1,
+      onEnter: () => {
+        tl.to('.zoom-container', {
+          scale: 0.5 + scrollY / 300,
+          opacity: 1 - scrollY / 500,
+          ease: "steps(48)",
+
+        });
+
+      },
+      onLeaveBack: () => {
+        tl.to('.zoom-container', {
+          scale: 1 - scrollY / 500,
+          opacity: 1 + scrollY / 500,
+          ease: "steps(48)",
+        });
+      },
+    });
+  }, []);
     return (
         <div>
-            {/* <header class="text-gray-600 body-font">
-                <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-                    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
 
-                        <img src="/TF LOGO.png" alt="" class="w-10 h-14 text-white p-2 " />
-                        <span class="ml-3 text-xl">TF Strategies</span>
-                    </a>
-                    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                        <a class="mr-5 hover:text-sky-500" href='/'>Home</a>
-                        <a class="mr-5 hover:text-sky-700 active: text-sky-500" href='/about'>About</a>
-                        <a class="mr-5 hover:text-sky-500" href='/servicee'>Services</a>
-                        <a class="mr-5 hover:text-sky-500" href='/price'>Pricing</a>
-                        <a class="mr-5 hover:text-sky-500" href='/case'>Case Study</a>
-                        <a class="mr-5 hover:text-sky-500" href='/contact'>Contact</a>
-                        <FaFacebookF class="mr-5" />
-                        <FaInstagram class="mr-5" />
-                    </nav>
-
-                </div>
-            </header> */}
             <Navbar />
             {/* photo */}
             <section class="text-gray-600 body-font">
                 <div class="container px-5 py-5 mx-auto flex flex-col">
                     <div class="w-full mx-auto ">
-                        <div class="rounded-lg h-full overflow-hidden">
-                            <img alt="content" class="object-cover object-center h-full w-full" src="https://dummyimage.com/1200x300" />
+                        <div class="box rounded-lg h-full overflow-hidden">
+                            {/* <img alt="content" class="object-cover object-center h-full w-full" src="https://dummyimage.com/1200x300" /> */}
+                            <motion.img
+                                className=' zoom-container shadow-md'
+                                src='https://dummyimage.com/1200x300'
+                                style={{
+                                    width: '100%',
+                                    display: 'flex',
+                                    animation: 'fade',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                            />
                         </div>
 
                     </div>
@@ -142,39 +186,7 @@ const page = () => {
                     </div>
                 </div>
             </section>
-            {/* tabs */}
-            {/* <section class="text-gray-600 body-font">
-                <div class="container px-5 py-5 mx-auto flex flex-wrap items-center">
-                    <div class="lg:w-2/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-                        <h1 class="title-font font-medium text-3xl text-gray-900">CRAFTING DIGITAL EXPERIENCES SINCE 2005</h1>
-                    </div>
-                    <div class="lg:w-3/5 md:w-1/2  rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
-
-
-
-
-                        <div>
-                            <div className="tab-header">
-                                <button onClick={() => handleTabClick('tab1')} className={`${activeTab === 'tab1' ? 'active-tab' : ''} bg-blue-200`}>
-                                    Tab 1
-                                </button>
-                                <button onClick={() => handleTabClick('tab2')} className={activeTab === 'tab2' ? 'active-tab' : ''}>
-                                    Tab 2
-                                </button>
-                                <button onClick={() => handleTabClick('tab3')} className={activeTab === 'tab3' ? 'active-tab' : ''}>
-                                    Tab 3
-                                </button>
-                            </div>
-
-                            <div className="tab-content">
-                                {activeTab === 'tab1' && <div>Content for Tab 1</div>}
-                                {activeTab === 'tab2' && <div>Content for Tab 2</div>}
-                                {activeTab === 'tab3' && <div>Content for Tab 3</div>}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section> */}
+            {/* history */}
             <section class="text-gray-600 body-font overflow-hidden">
                 <div class="container px-5 py-5 mx-auto">
                     <div className="text-2xl font-semibold  py-4">
@@ -408,46 +420,7 @@ const page = () => {
                     </div>
                 </div>
             </section>
-            {/* <footer class="text-gray-600 body-font pt-4 ">
-                <div class="bg-gray-100">
-                    <div class="container mx-auto py-10 px-5 flex flex-wrap flex-col sm:flex-row">
-                        <div>
-                            <p className="text-gray-500 text-sm text-center sm:text-left">
-                                Thirsty Fishh | Beyond the obvious
-                            </p>
-                            <p className="text-gray-500 text-sm text-center sm:text-left">
-                                © 2020 Thirsty Fishh | All Rightes Reserved
-                            </p>
-                        </div>
-
-
-
-                        <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-
-                            <div className='mx-2'>
-                                <p className="text-gray-500 text-sm text-center sm:text-left">
-                                    hello@thirstyfishh.com
-                                </p>
-                                <p className="text-gray-500 text-sm text-center sm:text-left">
-                                    +91 9970503705
-                                </p>
-                            </div>
-
-                            <div className='mx-2'>
-                                <p className="text-gray-500 text-sm text-center sm:text-left">
-                                   
-                                    Facebook
-                                </p>
-                                <p className="text-gray-500 text-sm text-center sm:text-left">
-                                    
-                                    Instagram
-                                </p>
-                            </div>
-
-                        </span>
-                    </div>
-                </div>
-            </footer > */}
+            <Footer />
         </div>
     )
 }

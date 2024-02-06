@@ -173,8 +173,8 @@ li button {
 }
 
 .business:hover {
-  color: antiquewhite;
-  background: rgb(54, 52, 52);
+  color: #fff;
+  background: rgb(79, 77, 77);
   cursor: pointer;
 }
 
